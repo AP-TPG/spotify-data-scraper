@@ -1,0 +1,3 @@
+Update DAILY_PLAYLIST_LISTINGS daily to get a record of which songs are in which playlists every day. Every day there will be X number of songs unknown to the existing SONG_LIBRARY. For those ones, we need to write them to the SONG_LIBRARY table and then get their song features and add those to SONG_FEATURES.
+
+Need to create separate records of song and artist popularity which is updated every day.

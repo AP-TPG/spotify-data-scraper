@@ -1,0 +1,18 @@
+steps:
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', 'gs://dmr-app-creds/bigQuery-SA.json', 'bigQuery-SA.json']
+
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', 'gs://dmr-app-creds/spotify-client-id.txt', 'spotify-client-id.txt']
+
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', 'gs://dmr-app-creds/spotify-client-secret.txt', 'spotify-client-secret.txt']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'europe-west2-docker.pkg.dev/dmr-stg/spotify-ingestor/spotify-ingestor', '.']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'europe-west2-docker.pkg.dev/dmr-stg/spotify-ingestor/spotify-ingestor']
+
+- name: 'gcr.io/cloud-builders/gke-deploy'
+  args: ['run', '--filename=k8s-config.yaml', '--image=europe-west2-docker.pkg.dev/dmr-stg/spotify-ingestor/spotify-ingestor', '--location=europe-west2-a', '--cluster=dmr-backend']

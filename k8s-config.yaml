@@ -1,0 +1,22 @@
+apiVersion: "batch/v1"
+kind: "CronJob"
+metadata:
+  name: "spotify-ingestor"
+  namespace: "default"
+spec:
+  schedule: "0 5 * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: "spotify-ingestor"
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: "spotify-ingestor-sha256-1"
+            image: "europe-west2-docker.pkg.dev/dmr-stg/spotify-ingestor/spotify-ingestor@sha256:b2c81644105c42840ceaa929c198244e3cee89965aee55e1da6d2be57ac2ee96"
+            resources:
+              limits:
+                memory: "4Gi"
+                cpu: "2"
