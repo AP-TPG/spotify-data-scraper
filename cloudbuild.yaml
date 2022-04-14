@@ -15,4 +15,4 @@ steps:
   args: ['push', 'europe-west2-docker.pkg.dev/dmr-stg/spotify-ingestor/spotify-ingestor']
 
 - name: 'gcr.io/cloud-builders/gke-deploy'
-  args: ['run', '--filename=k8s-config.yaml', '--image=europe-west2-docker.pkg.dev/dmr-stg/spotify-ingestor/spotify-ingestor', '--location=europe-west2-a', '--cluster=dmr-backend']
+  args: ['run', '--filename=k8s-config.yaml', '--image=europe-west2-docker.pkg.dev/dmr-stg/spotify-ingestor/spotify-ingestor', '--location=europe-west2', '--cluster=dmr-backend']
